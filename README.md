@@ -1,6 +1,16 @@
-# MLB Scraper
+# pybaseball_live
 
-This Python module provides a class `MLB_Scrape` that interacts with the MLB Stats API to retrieve various types of baseball-related data. The data is processed and returned as Polars DataFrames for easy manipulation and analysis.
+Interact with the MLB Stats API to retrieve various types of baseball-related data in [polars](https://pola.rs) DataFrame format.
+
+## Inspiration
+
+ - [mlb_scraper](https://github.com/tnestico/mlb_scraper) (this guy is a [great follow on X](https://x.com/TJStats) for baseball content)
+ - [pybaseball](https://github.com/jldbc/pybaseball)
+
+ I chose not to fork `mlb_scraper` because ... 
+ 
+ - I wanted to build it myself from scratch as a learning experience
+ - wanted to structure the code in a different way to make it easier to add onto (code split up, unit tested, & not one big class).
 
 ## Install Dependencies
 
