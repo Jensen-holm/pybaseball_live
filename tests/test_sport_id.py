@@ -3,7 +3,7 @@ import os
 
 sys.path.append(os.path.abspath(".."))
 
-from live_pybaseball.sport_id import sports, check_sport_id
+from pybaseball_live.sport_id import sports, check_sport_id
 
 
 def test_sports_df() -> None:
