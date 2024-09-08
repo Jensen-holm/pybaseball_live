@@ -6,7 +6,7 @@ import requests
 from .utils import ENDPOINT_URL
 from .exceptions import BadResponseCode
 
-__all__ = ["schedule"]
+__all__ = ["schedule", "schedule_range"]
 
 
 SCHEDULE_URL = ENDPOINT_URL.format(endpoint="schedule")
@@ -20,7 +20,7 @@ SCHEDULE_FILTER = (
 def schedule(
     years: list[int] = [datetime.datetime.now().year],
     sport_ids: list[int] = [1],
-    game_types: list[int] = ["R"],
+    game_types: list[str] = ["R"],
 ) -> Optional[pl.DataFrame]:
     """
     Retrieves the schedule of baseball games based on the specified parameters.
@@ -91,4 +91,19 @@ def schedule(
         )
         .unique(subset="game_id")
         .sort("date")
+    )
+
+
+def schedule_range(
+    sport_ids: list[int],
+    game_types: list[str],
+    start_dt: datetime.date = datetime.datetime.now().date(),
+    end_dt: datetime.date = datetime.datetime.now().date(),
+) -> Optional[pl.DataFrame]:
+    years = [yr for yr in range(start_dt.year, end_dt.year + 1)]
+    if (s := schedule(years=years, game_types=game_types, sport_ids=sport_ids)) is None:
+        return None
+
+    return s.filter(
+        (pl.col("date").dt.date() >= start_dt) & (pl.col("date").dt.date() <= end_dt)
     )

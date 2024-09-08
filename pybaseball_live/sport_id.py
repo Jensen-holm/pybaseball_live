@@ -5,7 +5,7 @@ import requests
 from .utils import ENDPOINT_URL
 from .exceptions import BadResponseCode, BadResponseData
 
-__all__ = ["get_sport_id", "check_sport_id"]
+__all__ = ["sports", "check_sport_id"]
 
 SPORT_URL = ENDPOINT_URL.format(endpoint="sports")
 
@@ -31,7 +31,7 @@ def sports() -> pl.DataFrame:
     return pl.DataFrame(sports_data)
 
 
-def check_sport_id(sport_id: int) -> Optional[str]:
+def check_sport_id(sport_id: int) -> Optional[pl.DataFrame]:
     """
     Checks if the provided sport ID exists in the list of sports retrieved from the MLB API.
 
